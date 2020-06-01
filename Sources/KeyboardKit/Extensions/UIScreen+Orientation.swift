@@ -15,7 +15,7 @@ extension UIScreen {
      input view controllers, since an extensions can't check
      the application's status bar style.
      */
-    var orientation: UIInterfaceOrientation {
+    public var orientation: UIInterfaceOrientation {
         let point = coordinateSpace.convert(CGPoint.zero, to: fixedCoordinateSpace)
         switch (point.x, point.y) {
         case (0, 0): return .portrait

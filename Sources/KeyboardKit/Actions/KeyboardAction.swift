@@ -24,7 +24,7 @@ import UIKit
  Actions like these are a way for you to express your intent,
  but require manual handling in a custom action handler.
 */
-public enum KeyboardAction: Equatable {
+public enum KeyboardAction: Equatable, ExpressibleByStringLiteral {
     
     case
     none,
@@ -49,6 +49,10 @@ public enum KeyboardAction: Equatable {
     shiftDown,
     space,
     tab
+    
+    public init(stringLiteral value: String) {
+        self = .character(value)
+    }
 }
 
 

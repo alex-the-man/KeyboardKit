@@ -29,7 +29,7 @@ private extension HorizontalKeyboardComponent {
     
     func setWidth(to width: CGFloat) {
         widthConstraint = widthConstraint ?? widthAnchor.constraint(equalToConstant: width)
-        widthConstraint?.priority = .defaultLow
+        widthConstraint?.priority = .defaultHigh
         widthConstraint?.constant = width
         widthConstraint?.isActive = true
     }
