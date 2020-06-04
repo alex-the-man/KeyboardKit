@@ -28,6 +28,7 @@ class TouchHandler {
     
     private var currentTouch: (UITouch, StockboardKey)?
     private var cursorMoveStartPosition: CGPoint?
+    private var movedCursor = false
     private var inputMode: InputMode = .idle
     private var keyRepeatTimer: Timer?
     private var keyRepeatCounter: Int = 0
@@ -79,6 +80,7 @@ class TouchHandler {
             lastAction == .space {
             inputMode = .cursorMoving
             cursorMoveStartPosition = touch.location(in: keyView)
+            movedCursor = false
             return
         } else if let cursorMoveStartPosition = cursorMoveStartPosition, inputMode == .cursorMoving {
             let point = touch.location(in: keyView)
@@ -88,6 +90,7 @@ class TouchHandler {
             while dX > TouchHandler.cursorMovingThreshold {
                 dX -= TouchHandler.cursorMovingThreshold
                 handleKey?(isLeft ? .moveCursorBackward : .moveCursorForward)
+                movedCursor = true
             }
             
             self.cursorMoveStartPosition = point
@@ -115,9 +118,9 @@ class TouchHandler {
         
         if self.inputMode == .backspacing {
             return
-        }
-        
-        if inputMode == .nextKeyboard {
+        } else if self.inputMode == .cursorMoving && !movedCursor {
+            handleKey?(key!.action)
+        } else if inputMode == .nextKeyboard {
             inputMode = .idle
             guard let event = event, let key = key, key.action == .nextKeyboard else { return }
             handleInputModeList?(key, event)
