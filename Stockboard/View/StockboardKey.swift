@@ -90,7 +90,7 @@ class StockboardKey: UIButton, ViewStateListener {
         isUserInteractionEnabled = true
         layer.cornerRadius = 5
         layer.shadowColor = UIColor(named: "keyShadowColor")?.resolvedColor(with: traitCollection).cgColor
-        layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
         layer.shadowOpacity = 1.0
         layer.shadowRadius = 0.0
         layer.masksToBounds = false
